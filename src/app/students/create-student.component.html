@@ -1,0 +1,149 @@
+<div class="create-student-container">
+  <h2>Create New Student</h2>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="studentForm" (ngSubmit)="createStudent()">
+    <!-- First Name Field -->
+    <div class="form-group">
+      <label for="first_name">First Name:</label>
+      <input 
+        type="text" 
+        id="first_name" 
+        formControlName="first_name" 
+        placeholder="Enter first name"
+        [class.is-invalid]="first_name?.invalid && first_name?.touched"
+      />
+      <div *ngIf="first_name?.invalid && first_name?.touched" class="error-text">
+        First name is required.
+      </div>
+    </div>
+
+    <!-- Last Name Field -->
+    <div class="form-group">
+      <label for="last_name">Last Name:</label>
+      <input 
+        type="text" 
+        id="last_name" 
+        formControlName="last_name" 
+        placeholder="Enter last name"
+        [class.is-invalid]="last_name?.invalid && last_name?.touched"
+      />
+      <div *ngIf="last_name?.invalid && last_name?.touched" class="error-text">
+        Last name is required.
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        placeholder="Enter email"
+        [class.is-invalid]="email?.invalid && email?.touched"
+      />
+      <div *ngIf="email?.hasError('required') && email?.touched" class="error-text">
+        Email is required.
+      </div>
+      <div *ngIf="email?.hasError('email') && email?.touched" class="error-text">
+        Please enter a valid email.
+      </div>
+    </div>
+
+    <!-- Age Field -->
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input 
+        type="number" 
+        id="age" 
+        formControlName="age" 
+        placeholder="Enter age"
+        [class.is-invalid]="age?.invalid && age?.touched"
+      />
+      <div *ngIf="age?.invalid && age?.touched" class="error-text">
+        Age is required.
+      </div>
+    </div>
+
+    <!-- Course Field -->
+    <div class="form-group">
+      <label for="course">Course:</label>
+      <input 
+        type="text" 
+        id="course" 
+        formControlName="course" 
+        placeholder="Enter course"
+        [class.is-invalid]="course?.invalid && course?.touched"
+      />
+      <div *ngIf="course?.invalid && course?.touched" class="error-text">
+        Course is required.
+      </div>
+    </div>
+
+    <!-- Year Level Field -->
+    <div class="form-group">
+      <label for="year_level">Year Level:</label>
+      <input 
+        type="number" 
+        id="year_level" 
+        formControlName="year_level" 
+        placeholder="Enter year level"
+        [class.is-invalid]="year_level?.invalid && year_level?.touched"
+      />
+      <div *ngIf="year_level?.invalid && year_level?.touched" class="error-text">
+        Year level is required.
+      </div>
+    </div>
+
+    <!-- GPA Field -->
+    <div class="form-group">
+      <label for="gpa">GPA:</label>
+      <input 
+        type="number" 
+        id="gpa" 
+        formControlName="gpa" 
+        placeholder="Enter GPA"
+        step="0.01"
+        [class.is-invalid]="gpa?.invalid && gpa?.touched"
+      />
+      <div *ngIf="gpa?.invalid && gpa?.touched" class="error-text">
+        GPA is required.
+      </div>
+    </div>
+
+    <!-- Enrollment Status Field -->
+    <div class="form-group">
+      <label for="enrollment_status">Enrollment Status:</label>
+      <select 
+        id="enrollment_status" 
+        formControlName="enrollment_status"
+        [class.is-invalid]="enrollment_status?.invalid && enrollment_status?.touched"
+      >
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+      <div *ngIf="enrollment_status?.invalid && enrollment_status?.touched" class="error-text">
+        Enrollment status is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      [disabled]="studentForm.invalid || isSubmitting"
+      class="submit-btn"
+    >
+      {{ isSubmitting ? 'Creating...' : 'Create Student' }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<h2>Student List</h2>
+
+<!-- Check if there are any students -->
+<div *ngIf="students().length === 0">
+  No students found.
+</div>
+
+<!-- List of students -->
+<ul *ngIf="students().length > 0">
+  <li *ngFor="let student of students()">
+    <strong>{{ student.first_name }} {{ student.last_name }}</strong>
+    <span> | Course: {{ student.course }}</span>
+    <span> | Year: {{ student.year_level }}</span>
+    <span> | GPA: {{ student.gpa }}</span>
+    <button (click)="deleteStudent(student.id)">Delete</button>
+  </li>
+</ul>
